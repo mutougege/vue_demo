@@ -3,30 +3,35 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <button @click="increment">加10</button>
     <button @click="incrementAsync">异步加5</button>
-    <div>{{doneTodos}}}</div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="goPage(1)">跳转到home页</button>
+    <div>{{ doneTodos }}}</div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
+  components: {},
   methods: {
     increment() {
       this.$store.commit('increment', 10) 	//传入额外的参数10，即 mutation 的 载荷（payload）
       console.log(this.$store.state.count)
     },
     incrementAsync() {
-      this.$store.dispatch('incrementAsync',5) 	//通过 Vuex Store 提供的 this.$store.dispatch() 方法调用actions 定义的方法
+      this.$store.dispatch('incrementAsync', 5) 	//通过 Vuex Store 提供的 this.$store.dispatch() 方法调用actions 定义的方法
       console.log(this.$store.state.count)
     },
+    goPage(type) {
+      console.log(this.$route)
+      if (type === 1) {
+        this.$router.push({path: '/home'})
+      }
+    }
   },
-  computed:{
+  computed: {
     doneTodos() {	//创建一个 computed 属性进行调用 getters
       return this.$store.getters.doneTodos;
     }
