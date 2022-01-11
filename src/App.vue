@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="./assets/logo.png" style="width: 100px">
     <button @click="increment">加10</button>
     <button @click="incrementAsync">异步加5</button>
     <button @click="goPage(1)">跳转到home页</button>
-    <div>{{ doneTodos }}}</div>
-    <router-view></router-view>
+    <div style="background: aliceblue">{{ doneTodos }}}</div>
+    <router-view class="main"></router-view>
   </div>
 </template>
 
@@ -47,5 +47,20 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  margin: 10px;
+  max-width: 300px;
+  justify-content: center;
+}
+
+.main {
+  width: 100%;
+  height: 500px;
+  background: beige;
 }
 </style>
