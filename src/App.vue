@@ -4,6 +4,12 @@
     <button @click="increment">加10</button>
     <button @click="incrementAsync">异步加5</button>
     <button @click="goPage(1)">跳转到home页</button>
+    <div>
+      <button @click="doAnim">动画测试</button>
+      <transition name="anim1">
+        <div v-if="animVisiable">动画组件</div>
+      </transition>
+    </div>
     <div style="background: aliceblue">{{ doneTodos }}}</div>
     <router-view class="main"></router-view>
   </div>
@@ -15,6 +21,11 @@
 export default {
   name: 'App',
   components: {},
+  data() {
+    return {
+      animVisiable: false
+    }
+  },
   methods: {
     increment() {
       this.$store.commit('increment', 10) 	//传入额外的参数10，即 mutation 的 载荷（payload）
@@ -29,6 +40,9 @@ export default {
       if (type === 1) {
         this.$router.push({path: '/home'})
       }
+    },
+    doAnim() {
+      this.animVisiable = !this.animVisiable;
     }
   },
   computed: {
@@ -62,5 +76,13 @@ button {
   width: 100%;
   height: 500px;
   background: beige;
+}
+
+.anim1-enter-active, .anim1-leave-active {
+  transition: opacity 5s;
+}
+
+.anim1-enter, .anim1-leave-to {
+  opacity: 0;
 }
 </style>
